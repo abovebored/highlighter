@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Copy highlighted code</title>
+
+	<link id="stylesheet" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github-gist.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
+
+	<style type="text/css">
+		body {
+			overflow: hidden;
+			background: #fff;
+		}
+		code,pre,textarea,body {
+			font-size: 13px;
+			font-family: 'Roboto Mono', monospace;
+		}
+		* { padding: 0; margin: 0; }
+		textarea, pre {
+			position: fixed;
+			top: 0; bottom: 0;
+			width: 50%;
+			overflow: scroll;
+			border: 0;
+			outline: 0;
+			padding-top: 20px;
+		}
+		pre {
+			right: 0;
+		}
+		textarea {
+			color: #000;
+			padding: 20px;
+		}
+		code {
+			min-height: 100%;
+			background: transparent !important;
+			padding: 0 !important;
+		}
+		footer {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			left: 20px
+		}
+		a {
+			color: #7f90ab;
+		}
+	</style>
+</head>
+<body>
+
+<textarea id="input" placeholder="Paste your code here…"></textarea>
+<pre><code id="output"></code></pre>
+
+<footer>
+	By <a href="http://twitter.com/abovedave">@abovedave</a>. Powered by <a href="https://highlightjs.org/">highlight.js</a>.
+
+	<div style="float:right">
+		🌈 Theme
+		<select id="theme">
+			<option value="github-gist">github-gist</option>
+			<option value="atom-one-light">atom-one-light</option>
+		</select>
+	</div>
+</footer>
+
+<script>
+	var input = document.getElementById('input'),
+		output = document.getElementById('output'),
+		stylesheet = document.getElementById('stylesheet'),
+		theme = document.getElementById('theme');
+
+	// Functions
+
+	// Copy code from input to output, and escape html
+	function copyCode(){
+		output.innerHTML = escapeHtml(input.value);
+	}
+
+	// Escape html function
+	function escapeHtml(unsafe) {
+		return unsafe
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/"/g, "&quot;")
+			.replace(/'/g, "&#039;");
+	}
+
+	// Change the stylehseet
+	function changeTheme(name) {
+		stylesheet.setAttribute('href', 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/' + name + '.min.css');  
+	}
+
+	// Update the theme
+	theme.addEventListener('change', function(event) {
+		changeTheme(theme.value);
+	});
+
+	// Focus the textarea
+	input.focus();
+
+	// Init highlight.js
+	hljs.initHighlighting.called = false;
+	hljs.initHighlighting();
+
+	// Update the highligh code block
+	document.addEventListener('keyup', function(event) {
+		copyCode();
+		hljs.highlightBlock(output);
+	});
+</script>
+</body>
+</html>
