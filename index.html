@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<title>Copy highlighted code</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github-gist.min.css">
+	<link id="stylesheet" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github-gist.min.css">
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 	
 	<style type="text/css">
 		body {
@@ -168,7 +168,7 @@
 
 	// Change the stylehseet
 	function changeTheme(name) {
-		stylesheet.setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/' + name + '.min.css');  
+		stylesheet.setAttribute('href', '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/' + name + '.min.css');  
 	}
 
 	// Update the theme
@@ -183,7 +183,7 @@
 	hljs.initHighlighting.called = false;
 	hljs.initHighlighting();
 
-	// Update the highligh code block
+	// Update the highlight code block
 	document.addEventListener('keyup', function(event) {
 		copyCode();
 		hljs.highlightBlock(output);
